@@ -39,9 +39,10 @@
       speech.lang = "en";
       
       let voices = [];
+    let synth = window.speechSynthesis;
       
-      window.speechSynthesis.onvoiceschanged = () => {
-  voices = window.speechSynthesis.getVoices();
+      synth.onvoiceschanged = () => {
+  voices = synth.getVoices();
   speech.voice = voices[0];
   let voiceSelect = document.querySelector("#voices");
   voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
@@ -71,19 +72,19 @@ document.querySelector("#voices").addEventListener("change", () => {
 
 document.querySelector("#start").addEventListener("click", () => {
   speech.text = document.querySelector("textarea").value;
-  window.speechSynthesis.speak(speech);
+  synth.speak(speech);
 });
 
 document.querySelector("#pause").addEventListener("click", () => {
-  window.speechSynthesis.pause();
+  synth.pause();
 });
 
 document.querySelector("#resume").addEventListener("click", () => {
-  window.speechSynthesis.resume();
+  synth.resume();
 });
 
 document.querySelector("#cancel").addEventListener("click", () => {
-  window.speechSynthesis.cancel();
+  synth.cancel();
 });
   </script>
 </html>
